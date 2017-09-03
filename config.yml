@@ -11,6 +11,9 @@ completeDirectory: complete
 # In seconds, how often capturebate-node checks for newly-online models
 modelScanInterval: 30
 
+# Minimum file size to consider a recording valid
+minFileSizeMb: 10
+
 # Debugging
 debug: false
 rtmpDebug: false
