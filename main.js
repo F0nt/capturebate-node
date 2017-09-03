@@ -18,6 +18,8 @@ var moment = require("moment");
 var S = require("string");
 var yaml = require("js-yaml");
 
+var runningStreams = 0;
+
 function getCurrentDateTime() {
   return moment().format("YYYY-MM-DDTHHmmss"); // The only true way of writing out dates and times, ISO 8601
 }
@@ -161,6 +163,15 @@ function getCommandArguments(modelName) {
 }
 
 function createCaptureProcess(modelName) {
+  if (config.maxStreams > 0 && runningStreams >= config.maxStreams) {
+    printErrorMsg(
+      "Skipped recording " +
+        colors.green("modeName") +
+        ": Reached maximum amount of streams"
+    );
+    return;
+  }
+
   var model = _.findWhere(modelsCurrentlyCapturing, { modelName: modelName });
 
   if (!!model) {
@@ -168,6 +179,7 @@ function createCaptureProcess(modelName) {
     return; // resolve immediately
   }
 
+  runningStreams++;
   printMsg(
     colors.green(modelName) + " is now online, starting rtmpdump process"
   );
@@ -213,6 +225,7 @@ function createCaptureProcess(modelName) {
 
       captureProcess.on("close", function(code) {
         printMsg(colors.green(modelName) + " stopped streaming");
+        runningStreams--;
 
         var model = _.findWhere(modelsCurrentlyCapturing, {
           pid: captureProcess.pid
@@ -316,6 +329,7 @@ function checkCaptureProcess(model) {
 
 var config = yaml.safeLoad(fs.readFileSync("config.yml", "utf8"));
 
+config.maxStreams = config.maxStreams || 0;
 config.minFileSizeMb = config.minFileSizeMb || 0;
 config.captureDirectory = path.resolve(config.captureDirectory);
 config.completeDirectory = path.resolve(config.completeDirectory);

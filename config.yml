@@ -13,6 +13,8 @@ modelScanInterval: 30
 
 # Minimum file size to consider a recording valid
 minFileSizeMb: 10
+# Maximum amount of parallel recordings
+maxStreams: 4
 
 # Debugging
 debug: false
