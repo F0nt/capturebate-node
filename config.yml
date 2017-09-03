@@ -13,3 +13,4 @@ modelScanInterval: 30
 
 # Debugging
 debug: false
+rtmpDebug: false
