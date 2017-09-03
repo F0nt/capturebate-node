@@ -1,7 +1,7 @@
 capturebate-node
 ================
 
-capturebate-node lets you follow and archive your favorite models' shows on chaturbate.com
+capturebate-node lets you archive your favorite models' shows on chaturbate.com
 
 ### Requirements
 [RTMPDump(ksv)](https://github.com/BurntSushi/rtmpdump-ksv) used to capture the streams
