@@ -1,10 +1,9 @@
 capturebate-node
-==========
+================
 
 capturebate-node lets you follow and archive your favorite models' shows on chaturbate.com
 
-Requirements
-==========
+### Requirements
 (Debian 7, minimum)
 
 [RTMPDump(ksv)](https://github.com/BurntSushi/rtmpdump-ksv) used to capture the streams.
@@ -13,8 +12,7 @@ Requirements
 
 [ffmpeg](https://www.ffmpeg.org/download.html) compiled with support for `libmp3lame` & `libspeex` audio for converting the output files.
 
-Setup
-===========
+### Setup
 
 Install requirements, run `npm install` in the same folder as main.js is.
 
@@ -24,8 +22,7 @@ Be mindful when capturing many streams at once to have plenty of space on disk a
 
 Before you can start capturing streams you first need to [follow](https://i.imgur.com/o9QyAVC.png) the models you want on the site, once you've done this you're ready to start capturebate-node by running `node main.js`
 
-Running & Output
-===========
+### Running & Output
 
 To start capturing streams you need to run `node main.js` I reccomend you do this in [screen](https://www.gnu.org/software/screen/) as that'll keep running if you lose connection to the machine or otherwise close your shell.
 
@@ -34,8 +31,7 @@ Standard output should look something this when recording streams:
 	[2015-05-16T00:19:02] capturebate-node started
 	[2015-05-16T00:19:08] eeeveee is now online, starting rtmpdump process
 
-Encoding
-===========
+### Encoding
 
 Once you've captured some streams you're going to need to convert the audio to have them play nice in most media players. This is where ffmpeg comes in, there is no need to convert the video so this doesn't take too long. To convert individual files do `ffmpeg -i input.flv -vcodec copy -acodec libmp3lame output.mp4` this will convert the speex audio to mp3 and change the container to mp4 (stream is h264)
 
